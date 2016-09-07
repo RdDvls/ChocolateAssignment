@@ -3,33 +3,26 @@
  */
 public class ChocolateMaker {
     public int makeChocolate(int small, int big, int goal) {
-        if(goal<5 && small>=goal) {
-            return goal;
-        }
-        if(goal<5 && small<goal) {
-            return -1;
-        }
-        if(goal>=5) {
-            if(5*big>goal) {
-                int temp=goal/5;
-                if(goal-temp*5<=small) {
-                    return goal-temp*5;
-                }
-                if(goal-temp*5>small) {
+        {
+            int x = big * 5;
+            if (x == goal)
+                return 0;
+            else if (x < goal) {
+                if ((x + small) < goal)
                     return -1;
+                else if ((x + small) == goal)
+                    return small;
+                else
+                    return goal - x;
+            } else {
+                while (x > goal) {
+                    x -= 5;
                 }
-            }
-
-            if(5*big<goal) {
-                if(small<(goal-5*big)) {
+                if (x + small < goal)
                     return -1;
-                }
-                if(small>=(goal-5*big)) {
-                    return goal-5*big;
-                }
+                else
+                    return goal - x;
             }
         }
-        return goal;
     }
-
 }
